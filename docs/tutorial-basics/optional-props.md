@@ -15,7 +15,7 @@ _ampm_ will display the time values in a 12-hour Am/Pm format
       <OpeningHoursUnstyled
         values={defaultBusinessHours}
         ampm
-        />
+      />
 
         // shows a time string of '15:00:00' as '3:00pm', etc...
  ...
@@ -38,7 +38,7 @@ and will copy them to all other active days
         values={defaultBusinessHours}
         ampm
         showCopyToAll
-        />
+      />
  ...
 
 ```
@@ -59,7 +59,7 @@ By default they are displayed in a row.
         ampm
         showCopyToAll
         verticalTimePairs={isMobile}
-        />
+      />
  ...
 
 ```

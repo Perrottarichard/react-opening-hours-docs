@@ -17,7 +17,7 @@ import { OpeningHoursUnstyled } from "react-opening-hours";
 
 export default function MyForm() {
   return (
-    // - explicitly define the width I want the component to be given
+    // - explicitly define the width you want the component to be given
     // - set height auto to allow it to grow/shrink vertically as days are added/removed
     <div style={{ width: "500px", height: "auto" }}>
       <OpeningHoursUnstyled values={defaultBusinessHours} />
