@@ -27,7 +27,8 @@ const FeatureList = [
     description: (
       <>
         Unstyled with Zero dependencies out-of-the-box. Target{" "}
-        <code>classNames</code> or <code>styles</code> to fit your use case
+        <code>classNames</code> or <code>styles</code> to fit your use case. MUI
+        v5 version coming soon!
       </>
     ),
   },
