@@ -17,8 +17,8 @@ const FeatureList = [
     title: "Customizable",
     description: (
       <>
-        Swap native elements for custom components or 3rd party components
-        (limited support)
+        Swap native elements for custom components or 3rd party components using
+        render props
       </>
     ),
   },
@@ -27,8 +27,7 @@ const FeatureList = [
     description: (
       <>
         Unstyled with Zero dependencies out-of-the-box. Target{" "}
-        <code>classNames</code> or <code>styles</code> to fit your use case. MUI
-        v5 version coming soon!
+        <code>classNames</code> or <code>styles</code> to fit your use case.
       </>
     ),
   },
@@ -37,9 +36,6 @@ const FeatureList = [
 function Feature({ title, description }) {
   return (
     <div className={clsx("col col--4")}>
-      {/* <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div> */}
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
