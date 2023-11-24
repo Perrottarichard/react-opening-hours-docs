@@ -26,10 +26,10 @@ _ampm_ will display the time values in a 12-hour Am/Pm format
 
 _showCopyToAll_ will display the Copy to All button
 
-The Copy To All button, when clicked, will take the first actived day's open and close time
+The Copy To All button, when clicked, will take the first active day's open and close time
 and will copy them to all other active days
 
-:::tip _Tip_: Pass a custom Icon Button to the _copyToAllButtonComponent_ slot. See [Component Slots](component-slots)
+:::tip _Tip_: Pass a custom Icon Button to _renderCopyButton_ . See [Render Props](render-props)
 :::
 
 ```jsx title="src/form.js"
