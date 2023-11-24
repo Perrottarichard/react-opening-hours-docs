@@ -4,6 +4,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import VerticalExample from "./vertical_example.png";
+import HorizontalExample from "./horizontal_opening_hours.png";
 
 import Heading from "@theme/Heading";
 import styles from "./index.module.css";
@@ -27,17 +28,42 @@ function HomepageHeader() {
           </Link>
           <div
             style={{
-              height: "300px",
-              width: "200px",
-              marginTop: 12,
-              marginBottom: 12,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <img
-              src={VerticalExample}
-              alt="example react opening hours"
-              style={{ borderRadius: "12px" }}
-            />
+            {/* <div
+              style={{
+                height: "300px",
+                width: "200px",
+                marginTop: 12,
+                marginBottom: 12,
+                marginRight: 12,
+                marginLeft: 12,
+              }}
+            >
+              <img
+                src={VerticalExample}
+                alt="example react opening hours"
+                style={{ borderRadius: "12px" }}
+              />
+            </div> */}
+            <div
+              style={{
+                height: "300px",
+                width: "300px",
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+            >
+              <img
+                src={HorizontalExample}
+                alt="example react opening hours"
+                style={{ borderRadius: "12px" }}
+              />
+            </div>
           </div>
         </div>
       </div>

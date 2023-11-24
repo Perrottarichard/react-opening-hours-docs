@@ -64,9 +64,12 @@ selectElementStyles,
 
 ## copyButtonElement
 
-Whether using _className_ or _style_ to target this element, it is recommended to use <code> position: 'absolute' </code>
+Whether using _className_ or _style_ or _renderCopyButton_ , it is recommended to use <code> position: 'absolute' </code>
 and define the <code>top</code> and <code>right</code> values
 
 Internally there is a <code> position: 'relative' </code> property on the first activated day's closing time container, which
 places the expected position of the Copy To All button somewhere in the top-right region. Depending on other styles, the _top_
 and _right_ values will surely need tweaking to get the placement just right
+
+:::tip _Tip_: Use your own or 3rd party Icon Button. See [Render Props](render-props/#rendercopybutton).
+:::
