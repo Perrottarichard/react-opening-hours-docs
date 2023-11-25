@@ -68,6 +68,12 @@ const config = {
             label: "GitHub",
             position: "right",
           },
+          {
+            href: "https://www.npmjs.com/package/react-opening-hours",
+            label: "NPM",
+            position: "right",
+          },
+          //
         ],
       },
       // footer: {
