@@ -5,11 +5,11 @@ import styles from "./styles.module.css";
 const FeatureList = [
   {
     title: "Easy to Use",
-    //Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
     description: (
       <>
-        Complete internal logic encapsulation allows you to simply give and get
-        the values you need in a specified format
+        Type-safe and intellisense-ready, encapsulation of the internal logic
+        allows you to simply give and get the values you need in a specified
+        format
       </>
     ),
   },

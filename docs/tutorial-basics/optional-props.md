@@ -10,6 +10,9 @@ Learn about the optional props:
 
 _ampm_ will display the time values in a 12-hour Am/Pm format
 
+This prop is only for display purposes and DOES NOT affect the actual values <br/>
+_getValues_ will still return the <code>values</code> in the shape of <code>FormValues</code>
+
 ```jsx title="src/form.js"
 ...
       <OpeningHoursUnstyled

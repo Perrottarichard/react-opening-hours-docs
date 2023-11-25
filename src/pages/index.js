@@ -3,10 +3,12 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
-import VerticalExample from "./vertical_example.png";
 import HorizontalExample from "./horizontal_opening_hours.png";
+import Ts from "./icons8-typescript-48.png";
+import Js from "./icons8-javascript-48.png";
 
 import Heading from "@theme/Heading";
+
 import styles from "./index.module.css";
 
 function HomepageHeader() {
@@ -18,7 +20,8 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-
+        <img src={Ts} style={{ borderRadius: "24px" }} />
+        <img src={Js} style={{ borderRadius: "24px" }} />
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
