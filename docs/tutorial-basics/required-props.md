@@ -4,31 +4,83 @@ sidebar_position: 1
 
 # Required Props
 
-Learn about the required _values_ & _getValues_ props:
+Learn about the required _defaultValues_ & _getValues_ props:
 
-## values prop
+## defaultValues prop
 
-The <em>values</em> prop is required and expects an object with 14 key/value pairs of this shape:
-
-### type FormValuesKey
+The <em>defaultValues</em> prop is required and expects an array of 14 objects in this shape:
 
 ```js
-type FormValuesKey =
-  | "sun_open"
-  | "sun_close"
-  | "mon_open"
-  | "mon_close"
-  | "tue_open"
-  | "tue_close"
-  | "wed_open"
-  | "wed_close"
-  | "thu_open"
-  | "thu_close"
-  | "fri_open"
-  | "fri_close"
-  | "sat_open"
-  | "sat_close";
+type DefaultDay = { id: string, time: TimeValue, label: string };
+type DefaultValues = DefaultDay[];
 ```
+
+```js
+//EXAMPLE:
+
+const defaultValues = [
+  { id: "sun_open", time: "closed", label: "Sunday" },
+  { id: "sun_close", time: "closed", label: "Sunday" },
+  { id: "mon_open", time: "09:00:00", label: "Monday" },
+  { id: "mon_close", time: "17:00:00", label: "Monday" },
+  { id: "tue_open", time: "09:00:00", label: "Tuesday" },
+  { id: "tue_close", time: "17:00:00", label: "Tuesday" },
+  { id: "wed_open", time: "09:00:00", label: "Wednesday" },
+  { id: "wed_close", time: "17:00:00", label: "Wednesday" },
+  { id: "thu_open", time: "09:00:00", label: "Thursday" },
+  { id: "thu_close", time: "17:00:00", label: "Thursday" },
+  { id: "fri_open", time: "09:00:00", label: "Friday" },
+  { id: "fri_close", time: "17:00:00", label: "Friday" },
+  { id: "sat_open", time: "closed", label: "Saturday" },
+  { id: "sat_close", time: "closed", label: "Saturday" },
+];
+
+// NOTE: The id and label can be whatever you need them to be as long as there are 14 of them.
+// However, the time must be a valid string of type TimeValue
+
+//The object MUST be in the order you want them to render.
+//The example above will render Sunday as the first day of the week.
+//Want to start the week with Monday?
+//Your default would be:
+const defaultValues = [
+  { id: "mon_open", time: "09:00:00", label: "Monday" },
+  { id: "mon_close", time: "17:00:00", label: "Monday" },
+  { id: "tue_open", time: "09:00:00", label: "Tuesday" },
+  { id: "tue_close", time: "17:00:00", label: "Tuesday" },
+  { id: "wed_open", time: "09:00:00", label: "Wednesday" },
+  { id: "wed_close", time: "17:00:00", label: "Wednesday" },
+  { id: "thu_open", time: "09:00:00", label: "Thursday" },
+  { id: "thu_close", time: "17:00:00", label: "Thursday" },
+  { id: "fri_open", time: "09:00:00", label: "Friday" },
+  { id: "fri_close", time: "17:00:00", label: "Friday" },
+  { id: "sat_open", time: "closed", label: "Saturday" },
+  { id: "sat_close", time: "closed", label: "Saturday" },
+  { id: "sun_open", time: "closed", label: "Sunday" },
+  { id: "sun_close", time: "closed", label: "Sunday" },
+];
+
+//Internally, each object will be assigned a sequence based on its index
+//so the returned values will look like this:
+[
+  { id: "mon_open", time: "09:00:00", label: "Monday", seq: 0 },
+  { id: "mon_close", time: "17:00:00", label: "Monday", seq: 1 },
+  { id: "tue_open", time: "09:00:00", label: "Tuesday", seq: 2 },
+  { id: "tue_close", time: "17:00:00", label: "Tuesday", seq: 3 },
+  { id: "wed_open", time: "09:00:00", label: "Wednesday", seq: 4 },
+  { id: "wed_close", time: "17:00:00", label: "Wednesday", seq: 5 },
+  { id: "thu_open", time: "09:00:00", label: "Thursday", seq: 6 },
+  { id: "thu_close", time: "17:00:00", label: "Thursday", seq: 7 },
+  { id: "fri_open", time: "09:00:00", label: "Friday", seq: 8 },
+  { id: "fri_close", time: "17:00:00", label: "Friday", seq: 9 },
+  { id: "sat_open", time: "closed", label: "Saturday", seq: 10 },
+  { id: "sat_close", time: "closed", label: "Saturday", seq: 11 },
+  { id: "sun_open", time: "closed", label: "Sunday", seq: 12 },
+  { id: "sun_close", time: "closed", label: "Sunday", seq: 13 },
+];
+```
+
+:::tip The default above denotes a standard Monday to Friday, 9:00AM - 5:00PM schedule and is the recommended default.
+:::
 
 ### type TimeValue
 
@@ -87,41 +139,9 @@ type TimeValue =
   | "closed";
 ```
 
-### type FormValues
-
-```js
-type FormValues = {
-  [key in FormValuesKey]: TimeValue;
-}
-```
-
-```js
-//EXAMPLE:
-
-const defaultValues: FormValues = {
-  sun_open: "closed",
-  sun_close: "closed",
-  mon_open: "09:00:00",
-  mon_close: "17:00:00",
-  tue_open: "09:00:00",
-  tue_close: "17:00:00",
-  wed_open: "09:00:00",
-  wed_close: "17:00:00",
-  thu_open: "09:00:00",
-  thu_close: "17:00:00",
-  fri_open: "09:00:00",
-  fri_close: "17:00:00",
-  sat_open: "closed",
-  sat_close: "closed",
-};
-```
-
-:::tip The default above denotes a standard Monday to Friday, 9:00AM - 5:00PM schedule and is the recommended default.
-:::
-
 ### Configure a "Closed" day
 
-        To denote a closed day, provide a string value of <em>'closed'</em> for both the open and close keys on any given day.
+        To denote a closed day, provide a string value of <em>'closed'</em> for both the open and close objects on a given day.
 
 ### Configure an "Open" day
 
@@ -131,16 +151,16 @@ const defaultValues: FormValues = {
 
 ```js
 // DO NOT do this:
-          wed_open: "09:00:00",   // wed_open and wed_close are a "Day"
-          wed_close: "closed",    // a "Day" cannot be both open and closed
+  { id: "mon_open", time: "09:00:00", label: "Monday" }, //This is invalid
+  { id: "mon_close", time: "closed", label: "Monday" }, //Monday cannot be opened and closed for the day
 
 // DO this for an open day:
-          wed_open: "09:00:00",
-          wed_close: "17:00:00",
+  { id: "mon_open", time: "09:00:00", label: "Monday" },
+  { id: "mon_close", time: "16:00:00", label: "Monday" },
 
 // OR this for a closed day:
-          wed_open: "closed",
-          wed_close: "closed",
+  { id: "mon_open", time: "closed", label: "Monday" },
+  { id: "mon_close", time: "closed", label: "Monday" },
 ```
 
 ### Validation
@@ -148,34 +168,34 @@ const defaultValues: FormValues = {
 Internally the component will not allow selection of an open time that is greater than or equal to the close time of that same day.
 Similarly, it will not allow selection of a close time that is less than or equal to the open time of that same day.
 
-For example, if <code>mon_open = "10:00:00"</code>, then <code>mon_close</code> cannot = <code>"08:00:00"</code>
+For example, if <code>mon_open</code> current time value = <code>"10:00:00"</code>, then the <code>mon_close</code> time options will be filtered to exclude times before 10:00:00
 
 ### Usage
 
 ```jsx title="src/form.js"
 import { OpeningHoursUnstyled } from "react-opening-hours";
 
-const defaultBusinessHours = {
-  sun_open: "closed",
-  sun_close: "closed",
-  mon_open: "09:00:00",
-  mon_close: "17:00:00",
-  tue_open: "09:00:00",
-  tue_close: "17:00:00",
-  wed_open: "09:00:00",
-  wed_close: "17:00:00",
-  thu_open: "09:00:00",
-  thu_close: "17:00:00",
-  fri_open: "09:00:00",
-  fri_close: "17:00:00",
-  sat_open: "closed",
-  sat_close: "closed",
-};
+const defaultBusinessHoursGerman = [
+  { id: "sonne_offen", time: "closed", label: "Sonntag" },
+  { id: "sonne_geschlossen", time: "closed", label: "Sonntag" },
+  { id: "montag_offen", time: "09:00:00", label: "Montag" },
+  { id: "montag_geschlossen", time: "17:00:00", label: "Montag" },
+  { id: "dienstag_offen", time: "09:00:00", label: "Dienstag" },
+  { id: "dienstag_geschlossen", time: "17:00:00", label: "Dienstag" },
+  { id: "mittwoch_offen", time: "09:00:00", label: "Mittwoch" },
+  { id: "mittwoch_geschlossen", time: "17:00:00", label: "Mittwoch" },
+  { id: "donnerstag_offen", time: "09:00:00", label: "Donnerstag" },
+  { id: "donnerstag_geschlossen", time: "17:00:00", label: "Donnerstag" },
+  { id: "freitag_offen", time: "09:00:00", label: "Freitag" },
+  { id: "freitag_geschlossen", time: "17:00:00", label: "Freitag" },
+  { id: "samstag_offen", time: "closed", label: "Samstag" },
+  { id: "samstag_geschlossen", time: "closed", label: "Samstag" },
+];
 
 export default function MyForm() {
   return (
     <div style={{ width: "500px" }}>
-      <OpeningHoursUnstyled values={defaultBusinessHours} />
+      <OpeningHoursUnstyled defaultValues={defaultBusinessHoursGerman} />
     </div>
   );
 }
@@ -198,22 +218,22 @@ export default function MyForm() {
   return (
     <div style={{ width: "500px" }}>
       <OpeningHoursUnstyled
-        values={{
-          sun_open: "closed",
-          sun_close: "closed",
-          mon_open: "09:00:00",
-          mon_close: "17:00:00",
-          tue_open: "09:00:00",
-          tue_close: "17:00:00",
-          wed_open: "09:00:00",
-          wed_close: "17:00:00",
-          thu_open: "09:00:00",
-          thu_close: "17:00:00",
-          fri_open: "09:00:00",
-          fri_close: "17:00:00",
-          sat_open: "closed",
-          sat_close: "closed",
-        }}
+        defaultValues={[
+          { id: "sun_open", time: "closed", label: "Sunday" },
+          { id: "sun_close", time: "closed", label: "Sunday" },
+          { id: "mon_open", time: "09:00:00", label: "Monday" },
+          { id: "mon_close", time: "17:00:00", label: "Monday" },
+          { id: "tue_open", time: "09:00:00", label: "Tuesday" },
+          { id: "tue_close", time: "17:00:00", label: "Tuesday" },
+          { id: "wed_open", time: "09:00:00", label: "Wednesday" },
+          { id: "wed_close", time: "17:00:00", label: "Wednesday" },
+          { id: "thu_open", time: "09:00:00", label: "Thursday" },
+          { id: "thu_close", time: "17:00:00", label: "Thursday" },
+          { id: "fri_open", time: "09:00:00", label: "Friday" },
+          { id: "fri_close", time: "17:00:00", label: "Friday" },
+          { id: "sat_open", time: "closed", label: "Saturday" },
+          { id: "sat_close", time: "closed", label: "Saturday" },
+        ]}
         getValues={(values) => doSomethingWithValues(values)}
       />
     </div>
@@ -221,4 +241,8 @@ export default function MyForm() {
 }
 ```
 
-_Important_ : getValues will always return the <code>values</code> in the shape of type <code>FormValues</code>
+_Important_ : getValues will always return the <code>values</code> in the shape of type <code>Day[]</code>
+
+```js
+type Day = { id: string, time: string, label: string, seq: number };
+```

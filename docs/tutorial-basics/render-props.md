@@ -180,63 +180,49 @@ const customSelectStyles = {
 
 export const MyForm = () => (
   <OpeningHoursUnstyled
-    values={{
-      sun_open: "closed",
-      sun_close: "closed",
-      mon_open: "09:00:00",
-      mon_close: "17:00:00",
-      tue_open: "09:00:00",
-      tue_close: "17:00:00",
-      wed_open: "09:00:00",
-      wed_close: "17:00:00",
-      thu_open: "09:00:00",
-      thu_close: "17:00:00",
-      fri_open: "09:00:00",
-      fri_close: "17:00:00",
-      sat_open: "closed",
-      sat_close: "closed",
-    }}
     getValues={(values) => console.log(values)}
+    defaultValues={[
+      { id: "dimanche_ouvert", time: "closed", label: "Dimanche" },
+      { id: "dimanche_fermé", time: "closed", label: "Dimanche" },
+      { id: "lundi_ouvert", time: "09:00:00", label: "Lundi" },
+      { id: "lundi_fermé", time: "17:00:00", label: "Lundi" },
+      { id: "mardi_ouvert", time: "09:00:00", label: "Mardi" },
+      { id: "mardi_fermé", time: "17:00:00", label: "Mardi" },
+      { id: "mercredi_ouvert", time: "09:00:00", label: "Mercredi" },
+      { id: "mercredi_fermé", time: "17:00:00", label: "Mercredi" },
+      { id: "jeudi_ouvert", time: "09:00:00", label: "Jeudi" },
+      { id: "jeudi_fermé", time: "17:00:00", label: "Jeudi" },
+      { id: "vendredi_ouvert", time: "09:00:00", label: "Vendredi" },
+      { id: "vendredi_fermé", time: "17:00:00", label: "Vendredi" },
+      { id: "samedi_ouvert", time: "closed", label: "Samedi" },
+      { id: "samedi_fermé", time: "closed", label: "Samedi" },
+    ]}
     ampm
     showCopyToAll
-    verticalTimePairs
     dayButtonContainerStyles={{ marginBottom: 12 }}
-    renderDayButton={({ id, text, onClick, active }) => (
-      <IconButton
-        key={id}
-        type="button"
-        variant="contained"
-        size="small"
-        sx={(theme) => ({
-          opacity: active ? 1 : 0.4,
-          px: text === "M" || text === "W" ? 1.25 : 1.5,
-          mx: 0.75,
-          bgcolor: theme.palette.primary.main,
-          color: theme.palette.getContrastText(theme.palette.primary.main),
-          "&:hover": {
-            bgcolor: theme.palette.primary.dark,
-            color: theme.palette.getContrastText(theme.palette.primary.dark),
-          },
-        })}
-        onClick={onClick}
-      >
-        <Typography component={"span"}>{text}</Typography>
-      </IconButton>
-    )}
+    renderDayButton={(props) => <AntDesignButton key={props.id} {...props} />}
+    getDayButtonLabelText={(label) => label.slice(0, 3)}
     renderCopyButton={({ onClick }) => (
       <Tooltip title="Copy To All">
         <IconButton
           onClick={onClick}
-          sx={{ position: "absolute", right: 16, top: 26 }}
+          sx={{ position: "absolute", right: 30, top: 0 }}
         >
-          <CopyAllRounded />
+          <ContentCopyOutlined />
         </IconButton>
       </Tooltip>
     )}
+    selectContainerStyles={{ width: "140px" }}
+    labelContainerStyles={{ width: "90px" }}
     selectType="react-select"
     renderSelect={(props) => <Select styles={customSelectStyles} {...props} />}
     renderLabel={({ id, label, ...other }) => (
-      <Typography key={id} variant="caption" {...other}>
+      <Typography
+        key={id}
+        variant="body1"
+        {...other}
+        sx={{ lineHeight: 3, fontFamily: "tahoma" }}
+      >
         {label}
       </Typography>
     )}

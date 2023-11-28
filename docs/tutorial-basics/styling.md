@@ -20,7 +20,7 @@ export default function MyForm() {
     // - explicitly define the width you want the component to be given
     // - set height auto to allow it to grow/shrink vertically as days are added/removed
     <div style={{ width: "500px", height: "auto" }}>
-      <OpeningHoursUnstyled values={defaultBusinessHours} />
+      <OpeningHoursUnstyled defaultValues={defaultBusinessHours} />
     </div>
   );
 }
