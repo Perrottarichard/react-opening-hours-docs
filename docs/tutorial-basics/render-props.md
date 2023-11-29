@@ -10,10 +10,6 @@ Learn how to use render props:
 
 _renderSelect_ can be used to substitute a custom component or 3rd party lib for the native select elements
 
-If _renderSelect_ is included, you MUST also pass the _selectType_ prop.
-
-Currently supported _selectType_ <code>react-select</code> or <code>native</code>
-
 For react-select just pass all the props to the Select component
 
 ```jsx
@@ -23,20 +19,22 @@ import Select from "react-select";
 ...other code
 
 <OpeningHoursUnstyled
-  selectType="react-select"
   renderSelect={(props) => <Select styles={customSelectStyles} {...props} />}
   ...
 
 ```
 
-For a custom implementation using the browser's native select, you'll have to place the props correctly:
+For MUI Select or a custom implementation using the browser's native select, you'll have to place the props correctly:
+
+Custom Component Example:
 
 ```jsx
 import {OpeningHoursUnstyled} from "react-opening-hours";
 
 const MyCustomSelect = (props) => {
-  const { id, options, value, onChange } = props;
+  const { id, day, options, value, onChange } = props;
   //id = unique string
+  //day = Day ie: type Day = { id: string, time: TimeOption, label: string, seq: number };
   //options = TimeOption []
   //value = TimeOption = {value: 'hh:mm:ss' | 'closed', label: 'hh:mm:ss' | 'closed' | 'hh:mm[am | pm]}
   //onChange = func
@@ -76,14 +74,39 @@ const MyForm = () => {
 
   return(
     <OpeningHoursUnstyled
-      selectType="native" // Required: Tells the component to handle native events
       renderSelect={(props) => <MyCustomSelect {...props} />}
       ...
   )
 }
+```
 
+MUI Select Example:
 
-
+```jsx
+<OpeningHoursUnstyled
+renderSelect={({ id, day, options, value, onChange }) => {
+      return (
+        <FormControl sx={{ width: '160px', my: 1 }}>
+          <InputLabel>{day.label}</InputLabel>
+          <Select
+            size="small"
+            key={id}
+            id={id}
+            value={value.value}
+            label={day.label}
+            onChange={onChange}
+          >
+            {options.map((o) => (
+              <MenuItem key={o.value} value={o.value}>
+                {o.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      );
+    }}
+...
+/>
 ```
 
 ### renderDayButton
@@ -214,7 +237,6 @@ export const MyForm = () => (
     )}
     selectContainerStyles={{ width: "140px" }}
     labelContainerStyles={{ width: "90px" }}
-    selectType="react-select"
     renderSelect={(props) => <Select styles={customSelectStyles} {...props} />}
     renderLabel={({ id, label, ...other }) => (
       <Typography

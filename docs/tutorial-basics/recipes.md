@@ -103,7 +103,6 @@ export const MyForm = () => (
     )}
     selectContainerStyles={{ width: "140px" }}
     labelContainerStyles={{ width: "90px" }}
-    selectType="react-select"
     renderSelect={(props) => <Select styles={customSelectStyles} {...props} />}
     renderLabel={({ id, label, ...other }) => (
       <Typography
@@ -119,4 +118,67 @@ export const MyForm = () => (
 );
 
 export default MyForm;
+```
+
+### Example using MUI Select, first day of the week as Monday, 24-hour format, in Spanish
+
+![mui example](../exampleMui.png)
+
+```jsx
+<OpeningHoursUnstyled
+  getValues={(values) => console.log(values)}
+  defaultValues={[
+    { id: "lun_open", time: "09:00:00", label: "Lunes" },
+    { id: "lun_close", time: "17:00:00", label: "Lunes" },
+    { id: "mar_open", time: "09:00:00", label: "Martes" },
+    { id: "mar_close", time: "17:00:00", label: "Martes" },
+    { id: "mie_open", time: "09:00:00", label: "Miércoles" },
+    { id: "mie_close", time: "17:00:00", label: "Miércoles" },
+    { id: "jue_open", time: "09:00:00", label: "Jueves" },
+    { id: "jue_close", time: "17:00:00", label: "Jueves" },
+    { id: "vie_open", time: "09:00:00", label: "Viernes" },
+    { id: "vie_close", time: "17:00:00", label: "Viernes" },
+    { id: "sab_open", time: "closed", label: "Sábado" },
+    { id: "sab_close", time: "closed", label: "Sábado" },
+    { id: "dom_open", time: "closed", label: "Domingo" },
+    { id: "dom_close", time: "closed", label: "Domingo" },
+  ]}
+  showCopyToAll
+  dayButtonContainerStyles={{ marginBottom: 12 }}
+  renderDayButton={(props) => <AntDesignButton key={props.id} {...props} />}
+  getDayButtonLabelText={(label) => label.slice(0, 3)}
+  renderCopyButton={({ onClick }) => (
+    <Tooltip title="Copy To All">
+      <IconButton
+        onClick={onClick}
+        sx={{ position: "absolute", right: 30, top: 0 }}
+      >
+        <ContentCopyOutlined />
+      </IconButton>
+    </Tooltip>
+  )}
+  selectContainerStyles={{ width: "180px" }}
+  labelContainerStyles={{ display: "none" }}
+  renderSelect={({ id, day, options, value, onChange }) => {
+    return (
+      <FormControl sx={{ width: "160px", my: 1 }}>
+        <InputLabel>{day.label}</InputLabel>
+        <Select
+          size="small"
+          key={id}
+          id={id}
+          value={value.value}
+          label={day.label}
+          onChange={onChange}
+        >
+          {options.map((o) => (
+            <MenuItem key={o.value} value={o.value}>
+              {o.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    );
+  }}
+/>
 ```

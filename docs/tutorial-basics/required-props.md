@@ -244,5 +244,5 @@ export default function MyForm() {
 _Important_ : getValues will always return the <code>values</code> in the shape of type <code>Day[]</code>
 
 ```js
-type Day = { id: string, time: string, label: string, seq: number };
+type Day = { id: string, time: TimeOption, label: string, seq: number };
 ```
